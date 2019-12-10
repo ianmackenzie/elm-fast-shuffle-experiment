@@ -13,12 +13,12 @@ randomInt =
 
 fastShuffle : List a -> Random.Generator (List a)
 fastShuffle items =
-    randomInt
+    Random.independentSeed
         |> Random.map
             (\seed ->
                 let
                     taggedItems =
-                        decorate items (Random.initialSeed seed) []
+                        decorate items seed []
 
                     shuffled =
                         List.sortBy Tuple.first taggedItems
